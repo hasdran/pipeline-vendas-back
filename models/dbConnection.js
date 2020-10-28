@@ -2,16 +2,16 @@ const sqlServer = require("mssql");
 var conn = require('tedious').Connection;
 
 var config = {
-  password: 'Succ3$$2019',
-  database: 'Cattalini',
+  password: '123',
+  database: 'ObaOba',
   stream: false,
   options: {
     enableArithAbort: true,
     encrypt: true
   },
   port: 1433,
-  user: 'cattaliniuser',
-  server: 'http://antartico'
+  user: 'teste',
+  server: 'http://192.168.100.116'
 };
 
 var connection = new Connection(config);

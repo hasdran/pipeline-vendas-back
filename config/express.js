@@ -12,10 +12,10 @@ module.exports = () => {
   // MIDDLEWARES
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }))
-  app.use(basicAuth({
-    users: { 'admin': 'Aa123456*+' }
-  }));
-  
+  // app.use(basicAuth({
+  //   users: { 'admin': 'Aa123456*+' }
+  // }));
+
   require('../routes/apiRoutes')(app);
 
   return app;

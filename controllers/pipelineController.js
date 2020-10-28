@@ -1,48 +1,35 @@
 // const Pipeline = require('../models/pipeline')
 var sql = require("mssql");
-var Connection = require('tedious').Connection;
+// var Connection = require('tedious').Connection;
 
-// var config = {
-//   password: 'Succ3$$2019',
-//   database: 'Cattalini',
-//   stream: false,
-//   options: {
-//     enableArithAbort: true,
-//     encrypt: true
-//   },
-//   port: 1433,
-//   user: 'cattaliniuser',
-//   server: 'http://antartico'
-// };
+const config = {
+    user: 'teste',
+    password: '123',
+    server: '192.168.100.116',
+    database: 'ObaOba',
+    options: {
+        trustedconnection: true,
+        enableArithAbort: true,
+        instanceName: 'SQLEXPRESS'
+    },
+    port: 1433
+}
 
-// var config = {
-//   server: '192.168.16.14',  //update me
-//   authentication: {
-//     type: 'default',
-//     options: {
-//       userName: 'cattaliniuser', //update me
-//       password: 'Succ3$$2019'  //update me
-//     }
-//   },
-//   options: {
-//     // If you are on Microsoft Azure, you need encryption:
-//     encrypt: true,
-//     database: 'Cattalini'  //update me
-//   }
-// };
+async function getPipes() {
+    try {
+        let pool = await sql.connect(config);
+        let pipeline = pool.request().query("SELECT * FROM pipes");
+        return pipeline.name;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-// var connection = new Connection(config);
-// connection.on('connect', function (err) {
-//   // If no error, then good to proceed.
-//   console.log("Connected");
-// })
-// connect to your database
-
-
-exports.findAll = (req, res) => {
-    var jsonPerson = '{"first_name":"billy", "age":23}';
-    var personObject = JSON.parse(jsonPerson);
-    res.status(200).send(personObject);
+exports.findAll = async (req, res) => {
+    getPipes().then(result => {
+        console.log(result);
+    })
+    res.status(200).send("Hello World");
 }
 
 // exports.findAllBKP = (req, res) => {
